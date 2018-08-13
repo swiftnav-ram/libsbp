@@ -139,29 +139,48 @@ definitions:
     short_desc: Inertial Navigation System status message
     desc: |
         The INS status message describes the state of the operation
-        and initialization of the inertial navigation system. 
+        and initialization of the inertial navigation system.
     fields:
         - flags:
             type: u32
             desc: Status flags
             fields:
-              - 8-31:
+              - 9-31:
                   desc: Reserved
-              - 5-7:
-                  desc:  IMU Status
+              - 5-8:
+                  desc:  INS Status
                   values:
-                      - 0: IMU Ready
-                      - 1: No raw IMU data
-                      - 2: No raw IMU timestamp
-                      - 3: Unrecommended raw IMU rate
-              - 3-4:
+                      - 0: License error
+                      - 1: Calibration data error
+                      - 2: Unlock error
+                      - 3: Gyroscope bias error
+                      - 4: Accelerometer bias error
+                      - 5: Position variance threshold exceeded
+                      - 6: Reserved
+                      - 7: Reserved
+                      - 8: Reserved
+                      - 9: Reserved
+                      - 10: Reserved
+                      - 11: Reserved
+                      - 12: Reserved
+                      - 13: Reserved
+                      - 14: INS initializing
+                      - 15: INS ready
+              - 2-4:
+                  desc: IMU Status
+                  values:
+                      - 0: No RAW IMU data
+                      - 1: No RAW IMU timestamp
+                      - 2: No AUX IMU data
+                      - 3: Unrecognized RAW IMU data rate
+                      - 4: Reserved
+                      - 5: Reserved
+                      - 6: Reserved
+                      - 7: IMU ready
+              - 0-1:
                   desc: Initialization Routine Indicator
                   values:
-                      - 0: None
-                      - 1: Initial startup
-              - 0-2:
-                  desc: INS Status
-                  values:
-                      - 0: INS ready
-                      - 1: INS initializing
-                      - 2: INS error 
+                      - 0: Waiting for data
+                      - 1: Collecting IMU data
+                      - 2: Collecting GPS data
+                      - 3: Initialization complete
